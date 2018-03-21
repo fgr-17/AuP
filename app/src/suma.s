@@ -36,11 +36,14 @@
 	/**
 	 * Directiva al ensablador que permite indicar que se encarga de buscar
 	 * la instruccion mas apropiada entre thumb y thumb2
+	 UAL: unified assembly language: quiere decir que contiene codigo de thumb y arm
+	 juntos, pero esto me permitiria correrlo en un procesador A que tiene modo ARM.
+
 	 */
 	.syntax unified
 
 	/**
-	 * .text permite indicar una seccion de codigo.
+	 * .text permite indicar una seccion de codigo. Esto hace mandarlo a la seccion de codigo
 	 */
 	.text
 
@@ -48,6 +51,7 @@
 	 * .global permite definir un simbolo exportable,
 	 * es decir que podemos verlo desde otros modulos (equivalente a extern).
      * Definimos la rutina como global para que sea visible desde otros modulos.
+     * esto me da el nombre de la funcion, es un archivo por funcion.
      */
 	.global asmSum
 
@@ -56,6 +60,7 @@
 	 * Indicamos que la siguiente subrutina debe ser ensamblada en modo thumb,
 	 * entonces en las direcciones en el ultimo bit tendran el 1 para que se reconozcan como en modo thumb.
 	 * Siempre hay que ponerla antes de la primer instruccion.
+	 * Me dice que las instrucciones que vienen esta todo en modo thumb
 	 */
 	.thumb_func
 
@@ -67,6 +72,8 @@
  *
  *	En r0 se cargara firstOperand y en r1 se carga secondOperand. Luego el valor devuelto estara en r0 (si son 32 bits).
  *	Si el resultado que retorna es en 64 bits, usa r0 y r1.
+
+ * etiqueta que tiene que coincidir con el nombre de la funcion.
 */
 
 asmSum:

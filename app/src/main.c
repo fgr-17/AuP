@@ -69,8 +69,8 @@ static void initHardware(void)
 /*==================[external functions definition]==========================*/
 
 int main(void)
-{
-	uint32_t aValue = 20,
+{   /** como no hago nada con las variables, pasa los valores por registros y no reserva memoria ni stack*/
+	static uint32_t aValue = 20,
 			 otherValue = 30,
 			 sumResult;
 
