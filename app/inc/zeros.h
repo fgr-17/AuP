@@ -30,90 +30,40 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *
  */
- 
-/** @brief This is a simple blink example.
- */
 
-/** \addtogroup blink Bare-metal blink example
- ** @{ */
+#ifndef _ZEROS_H_
+#define _ZEROS_H_
 
 /*==================[inclusions]=============================================*/
 
-#include <stdint.h>
+/*==================[cplusplus]==============================================*/
 
-#include "main.h"
-#include "board.h"
-#include "zeros.h"
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-/*==================[macros and definitions]=================================*/
+/*==================[macros]=================================================*/
 
-#define VEC_LONGITUD 16
+/*==================[typedef]================================================*/
 
-/*==================[internal data declaration]==============================*/
+/*==================[external data declaration]==============================*/
 
-uint32_t vec [VEC_LONGITUD];
-/*==================[internal functions declaration]=========================*/
+/*==================[external functions declaration]=========================*/
 
-/** @brief hardware initialization function
- *	@return none
+/**
+ * Funcion que suma dos enteros de 32 bits y devuelve el resultado
+ * @param firstOperand primer sumando
+ * @param secondOperand segundo sumando
+ * @return suma
  */
-static void initHardware(void);
+extern uint32_t zerosAsm (uint32_t * vector, uint32_t longitud);
+extern void zerosC (uint32_t * vector, uint32_t longitud);
+/*==================[cplusplus]==============================================*/
 
-/*==================[internal data definition]===============================*/
-
-/*==================[external data definition]===============================*/
-
-/*==================[internal functions definition]==========================*/
-
-static void initHardware(void)
-{
-	Board_Init();
-	SystemCoreClockUpdate();
-	//SysTick_Config(SystemCoreClock / 1000);
+#ifdef __cplusplus
 }
-
-
-/** el registro DWT_CYCCNT cuenta los ciclos de maq, DWT_CTRL lo activa haciendo |1
- *
- * puedo reiniciar el CYCCNT cuando quiero, y guardarlo a cualquier variable.
- * */
-
-/*==================[external functions definition]==========================*/
-
-int main(void)
-{   /* como no hago nada con las variables, pasa los valores por registros y no reserva memoria ni stack*/
-	uint32_t aValue = 20,
-			 otherValue = 30,
-			 sumResult;
-
-	uint32_t i = 0;
-
-	for(i = 0; i < VEC_LONGITUD; i++)
-		vec[i] = i;
-
-
-	zerosC(vec, VEC_LONGITUD);
-
-	for(i = 0; i < VEC_LONGITUD; i++)
-			vec[i] = i;
-
-	zerosAsm (vec, VEC_LONGITUD);
-
-
-
-
-
-
-	initHardware();
-
-	sumResult = asmSum(aValue, otherValue);
-
-	while (1)
-	{
-		__WFI();
-	}
-}
+#endif
 
 /** @} doxygen end group definition */
-
 /*==================[end of file]============================================*/
+#endif /* #ifndef _MAIN_H_ */
