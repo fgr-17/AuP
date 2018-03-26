@@ -76,9 +76,16 @@ static void initHardware(void)
 /** el registro DWT_CYCCNT cuenta los ciclos de maq, DWT_CTRL lo activa haciendo |1
  *
  * puedo reiniciar el CYCCNT cuando quiero, y guardarlo a cualquier variable.
+ *
+ * el reloj esta en 214MHz
  * */
 
 /*==================[external functions definition]==========================*/
+
+
+volatile uint32_t *DWT_CTRL = (uint32_t*) 0xE0001000;
+volatile uint32_t *DWT_CYCCNT = (uint32_t*) 0xE0001004;
+
 
 int main(void)
 {   /* como no hago nada con las variables, pasa los valores por registros y no reserva memoria ni stack*/
@@ -88,18 +95,28 @@ int main(void)
 
 	uint32_t i = 0;
 
+	uint32_t ciclos_asm = 0;
+	uint32_t ciclos_c = 0;
+
+	*DWT_CTRL |= 1;
+
+
 	for(i = 0; i < VEC_LONGITUD; i++)
 		vec[i] = i;
 
+	*DWT_CYCCNT = 0;
 
 	zerosC(vec, VEC_LONGITUD);
+	ciclos_c = 	*DWT_CYCCNT;
+
 
 	for(i = 0; i < VEC_LONGITUD; i++)
 			vec[i] = i;
 
+	*DWT_CYCCNT = 0;
 	zerosAsm (vec, VEC_LONGITUD);
 
-
+	ciclos_asm = *DWT_CYCCNT;
 
 
 
