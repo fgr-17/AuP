@@ -52,7 +52,7 @@
      * Definimos la rutina como global para que sea visible desde otros modulos.
      * esto me da el nombre de la funcion, es un archivo por funcion.
      */
-	.global productoEscalar32ASM
+	.global productoEscalar16ASM
 
 
 	/**
@@ -79,20 +79,22 @@
 #define longitud 		r2
 #define escalar 		r3
 #define auxiliar		r4
+
+
 /*
  * el array se incrementa cada 4, en la ultima posicion la tengo en vector + (longitud - 1)*4
  */
 
-productoEscalar32ASM:
-   push {auxiliar, lr}  					/* guardamos la direccion de retorno en la pila */
-   sub longitud, 1				/* decremento el registro longitud */
+productoEscalar16ASM:
+   push {auxiliar, lr}  									/* guardamos la direccion de retorno en la pila */
+   sub longitud, 1											/* decremento el registro longitud */
 
 lazo:
-   ldr auxiliar, [vectorIn, longitud, LSL 2]  /* levanto un elemento desde el final hacia abajo */
-   mul auxiliar, escalar, auxiliar					/* multiplico el elemento por un escalar */
-   str auxiliar, [vectorOut, longitud, LSL 2]
-   subs longitud, 1						/* decremento el "contador" */
-   bpl lazo
+   ldrsh 	auxiliar, [vectorIn, longitud, LSL 1]  			/* levanto un elemento desde el final hacia abajo */
+   mul 		auxiliar, escalar, auxiliar						/* multiplico el elemento por un escalar */
+   strh 	auxiliar, [vectorOut, longitud, LSL 1]
+   subs 	longitud, 1						/* decremento el "contador" */
+   bpl 		lazo
 
 
 	/* las unicas instrucciones con las que accedo a memoria son load y store */
