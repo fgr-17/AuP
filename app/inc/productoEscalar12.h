@@ -5,8 +5,8 @@
  *      Author: piro2
  */
 
-#ifndef APP_INC_PRODUCTOESCALAR16_H_
-#define APP_INC_PRODUCTOESCALAR16_H_
+#ifndef APP_INC_PRODUCTOESCALAR12_H_
+#define APP_INC_PRODUCTOESCALAR12_H_
 
 
 
@@ -32,8 +32,8 @@ extern "C" {
  * @param secondOperand segundo sumando
  * @return suma
  */
-extern void productoEscalar16ASM (uint16_t * vectorIn, uint16_t * vectorOut, uint32_t longitud, uint16_t escalar);
-extern void productoEscalar16C (uint16_t * vectorIn, uint16_t * vectorOut, uint32_t longitud, uint16_t escalar);
+extern void productoEscalar12ASM (uint16_t * vectorIn, uint16_t * vectorOut, uint32_t longitud, uint16_t escalar);
+extern void productoEscalar12C (uint16_t * vectorIn, uint16_t * vectorOut, uint32_t longitud, uint16_t escalar);
 /*==================[cplusplus]==============================================*/
 
 #ifdef __cplusplus

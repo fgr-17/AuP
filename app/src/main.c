@@ -95,6 +95,7 @@ volatile uint32_t ciclos_c = 0;
 static void Ejercicio1(void);
 static void Ejercicio2(void);
 static void Ejercicio3(void);
+static void Ejercicio4(void);
 
 
 int main(void)
@@ -106,7 +107,9 @@ int main(void)
 
 	// Ejercicio1();
 	// Ejercicio2();
-	Ejercicio3();
+	// Ejercicio3();
+	Ejercicio4();
+
 
 	initHardware();
 
@@ -117,6 +120,11 @@ int main(void)
 		__WFI();
 	}
 }
+
+/**
+ * @fn void Ejercicio1(void)
+ *
+ */
 
 
 void Ejercicio1(void) {
@@ -141,6 +149,11 @@ void Ejercicio1(void) {
 	ciclos_asm = *DWT_CYCCNT;
 
 }
+
+/**
+ * @fn void Ejercicio2(void)
+ *
+ */
 
 void Ejercicio2 (void) {
 
@@ -171,6 +184,13 @@ void Ejercicio2 (void) {
 	return;
 }
 
+
+/**
+ * @fn void Ejercicio3(void)
+ *
+ */
+
+
 void Ejercicio3 (void) {
 
 	volatile uint16_t arrayEntrada [ARRAY_L];
@@ -197,6 +217,40 @@ void Ejercicio3 (void) {
 
 	return;
 }
+
+/**
+ * @fn void Ejercicio4(void)
+ *
+ */
+
+
+void Ejercicio4 (void) {
+
+	volatile uint16_t arrayEntrada [ARRAY_L];
+	volatile uint16_t arraySalida [ARRAY_L];
+
+	volatile uint16_t ganancia = 2;
+	uint16_t base = (1 << 11) - 10;
+	uint32_t i;
+
+	for (i = 0; i < ARRAY_L; i++){
+		arrayEntrada[i] = i + base;
+		arraySalida[i] = 0;
+	}
+
+
+	productoEscalar12C(arrayEntrada, arraySalida, ARRAY_L, ganancia);
+
+	for (i = 0; i < ARRAY_L; i++){
+		arrayEntrada[i] = i + base;
+		arraySalida[i] = 0;
+	}
+	productoEscalar12ASM(arrayEntrada, arraySalida, ARRAY_L, ganancia);
+
+
+	return;
+}
+
 
 /** @} doxygen end group definition */
 
