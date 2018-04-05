@@ -44,10 +44,11 @@
 #include "main.h"
 #include "board.h"
 #include "zeros.h"
+#include "productoEscalar32.h"
 
 /*==================[macros and definitions]=================================*/
 
-#define VEC_LONGITUD 16
+#define VEC_LONGITUD 1000
 
 /*==================[internal data declaration]==============================*/
 
@@ -83,43 +84,27 @@ static void initHardware(void)
 /*==================[external functions definition]==========================*/
 
 
-volatile uint32_t *DWT_CTRL = (uint32_t*) 0xE0001000;
-volatile uint32_t *DWT_CYCCNT = (uint32_t*) 0xE0001004;
+volatile uint32_t * DWT_CTRL   = (uint32_t *)0xE0001000;
+volatile uint32_t * DWT_CYCCNT = (uint32_t *)0xE0001004;
+
+
+volatile uint32_t ciclos_asm = 0;
+volatile uint32_t ciclos_c = 0;
+
+
+static void Ejercicio1(void);
+static void Ejercicio2(void);
 
 
 int main(void)
+
 {   /* como no hago nada con las variables, pasa los valores por registros y no reserva memoria ni stack*/
 	uint32_t aValue = 20,
 			 otherValue = 30,
 			 sumResult;
 
-	uint32_t i = 0;
-
-	uint32_t ciclos_asm = 0;
-	uint32_t ciclos_c = 0;
-
-	*DWT_CTRL |= 1;
-
-
-	for(i = 0; i < VEC_LONGITUD; i++)
-		vec[i] = i;
-
-	*DWT_CYCCNT = 0;
-
-	zerosC(vec, VEC_LONGITUD);
-	ciclos_c = 	*DWT_CYCCNT;
-
-
-	for(i = 0; i < VEC_LONGITUD; i++)
-			vec[i] = i;
-
-	*DWT_CYCCNT = 0;
-	zerosAsm (vec, VEC_LONGITUD);
-
-	ciclos_asm = *DWT_CYCCNT;
-
-
-
+	// Ejercicio1();
+	Ejercicio2();
 
 	initHardware();
 
@@ -130,6 +115,61 @@ int main(void)
 		__WFI();
 	}
 }
+
+
+void Ejercicio1(void) {
+	uint32_t i = 0;
+
+	*DWT_CTRL |= 1;
+
+	for(i = 0; i < VEC_LONGITUD; i++)
+		vec[i] = i;
+
+	*DWT_CYCCNT = 0;
+
+	zerosC(vec, VEC_LONGITUD);
+	ciclos_c = 	*DWT_CYCCNT;
+
+	for(i = 0; i < VEC_LONGITUD; i++)
+			vec[i] = i;
+
+	*DWT_CYCCNT = 0;
+	zerosAsm (vec, VEC_LONGITUD);
+
+	ciclos_asm = *DWT_CYCCNT;
+
+}
+
+void Ejercicio2 (void) {
+
+
+#define ARRAY_L 16
+
+	volatile uint32_t arrayEntrada [ARRAY_L];
+	volatile uint32_t arraySalida [ARRAY_L];
+
+	volatile uint32_t ganancia = 2;
+	uint32_t i;
+
+	for (i = 0; i < ARRAY_L; i++){
+		arrayEntrada[i] = i;
+		arraySalida[i] = 0;
+	}
+
+
+	productoEscalar32C(arrayEntrada, arraySalida, ARRAY_L, ganancia);
+
+	for (i = 0; i < ARRAY_L; i++){
+		arrayEntrada[i] = i;
+		arraySalida[i] = 0;
+	}
+	productoEscalar32ASM(arrayEntrada, arraySalida, ARRAY_L, ganancia);
+
+
+	return;
+}
+
+
 
 /** @} doxygen end group definition */
 

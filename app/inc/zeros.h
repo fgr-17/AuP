@@ -56,7 +56,7 @@ extern "C" {
  * @param secondOperand segundo sumando
  * @return suma
  */
-extern uint32_t zerosAsm (uint32_t * vector, uint32_t longitud);
+extern void zerosAsm (uint32_t * vector, uint32_t longitud);
 extern void zerosC (uint32_t * vector, uint32_t longitud);
 /*==================[cplusplus]==============================================*/
 

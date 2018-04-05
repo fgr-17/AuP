@@ -55,4 +55,5 @@ out/app/src/main.o: app/src/main.c app/inc/main.h \
  lib/lpc_chip_43xx/inc/iap_18xx_43xx.h lib/lpc_chip_43xx/inc/error.h \
  lib/lpc_chip_43xx/inc/i2cm_18xx_43xx.h lib/lpc_chip_43xx/inc/fpu_init.h \
  lib/lpc_board_ciaa_edu_4337/inc/board_api.h \
- lib/lpc_chip_43xx/inc/lpc_types.h app/inc/zeros.h
+ lib/lpc_chip_43xx/inc/lpc_types.h app/inc/zeros.h \
+ app/inc/productoEscalar32.h

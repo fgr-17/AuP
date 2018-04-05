@@ -67,7 +67,7 @@
 /**
  *	prototipo de la funcion en C
  *
- *	uint32_t asmSum(uint32_t firstOperand, uint32_t secondOperand);
+ *	void zerosAsm (uint32_t * vector, uint32_t longitud);
  *
  *	En r0 se cargara firstOperand y en r1 se carga secondOperand. Luego el valor devuelto estara en r0 (si son 32 bits).
  *	Si el resultado que retorna es en 64 bits, usa r0 y r1.
@@ -84,21 +84,18 @@
  */
 
 zerosAsm:
-   push {lr}  				/* guardamos la direccion de retorno en la pila */
-   ldr r2, =0x00000000	/* cargo el registro en cero */
-   sub r1, 1			/* decremento el registro longitud */
+   push {lr}  					/* guardamos la direccion de retorno en la pila */
+   ldr zero, =0x00000000		/* cargo el registro en cero */
+   sub longitud, 1				/* decremento el registro longitud */
 
 lazo:
-   str r2, [r0, r1, LSL 2]
-   subs r1, 1
+   str zero, [vector, longitud, LSL 2] /* se multiplica longitud por 4 para tener bytes, empiezo poniendo en cero desde arriba*/
+   subs longitud, 1						/* decremento el "contador" */
    bne lazo
 
-   ldr r2, [r0]
+   ldr zero, [vector]					/* hago uno mas que quedo fuera del bucle  */
 
 	/* las unicas instrucciones con las que accedo a memoria son load y store */
-
-
-
 
 	pop {pc}   /* retorno */
 
