@@ -45,6 +45,7 @@
 #include "board.h"
 #include "zeros.h"
 #include "productoEscalar32.h"
+#include "filtroVentana10.h"
 
 /*==================[macros and definitions]=================================*/
 
@@ -96,7 +97,7 @@ static void Ejercicio1(void);
 static void Ejercicio2(void);
 static void Ejercicio3(void);
 static void Ejercicio4(void);
-
+static void Ejercicio5(void);
 
 int main(void)
 
@@ -108,7 +109,8 @@ int main(void)
 	// Ejercicio1();
 	// Ejercicio2();
 	// Ejercicio3();
-	Ejercicio4();
+	// Ejercicio4();
+	Ejercicio5();
 
 
 	initHardware();
@@ -251,6 +253,44 @@ void Ejercicio4 (void) {
 	return;
 }
 
+/**
+ * @fn void Ejercicio5(void)
+ *
+ */
+
+
+void Ejercicio5 (void) {
+
+	volatile uint16_t arrayEntrada [ARRAY_L];
+	volatile uint16_t arraySalida [ARRAY_L - FILTRO_L + 1];
+
+	uint16_t base = 0;
+	uint32_t i;
+
+	for (i = 0; i < ARRAY_L; i++){
+		arrayEntrada[i] = i + base;
+
+		if(i < ARRAY_L - FILTRO_L + 1)
+			arraySalida[i] = 0;
+
+	}
+
+
+	filtroVentana10C(arrayEntrada, arraySalida, ARRAY_L);
+
+	for (i = 0; i < ARRAY_L; i++){
+
+		arrayEntrada[i] = i + base;
+
+		if(i < ARRAY_L - FILTRO_L + 1)
+			arraySalida[i] = 0;
+
+	}
+
+	filtroVentana10ASM(arrayEntrada, arraySalida, ARRAY_L);
+
+	return;
+}
 
 /** @} doxygen end group definition */
 
