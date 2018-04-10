@@ -50,6 +50,9 @@
 /*==================[macros and definitions]=================================*/
 
 #define VEC_LONGITUD 1000
+#define ARRAY_L 16
+#define ARRAY_32	4
+
 
 /*==================[internal data declaration]==============================*/
 
@@ -99,6 +102,8 @@ static void Ejercicio3(void);
 static void Ejercicio4(void);
 static void Ejercicio5(void);
 
+static void Ejercicio6(void);
+
 int main(void)
 
 {   /* como no hago nada con las variables, pasa los valores por registros y no reserva memoria ni stack*/
@@ -110,7 +115,8 @@ int main(void)
 	// Ejercicio2();
 	// Ejercicio3();
 	// Ejercicio4();
-	Ejercicio5();
+	// Ejercicio5();
+	Ejercicio6();
 
 
 	initHardware();
@@ -158,9 +164,6 @@ void Ejercicio1(void) {
  */
 
 void Ejercicio2 (void) {
-
-
-#define ARRAY_L 16
 
 	volatile uint32_t arrayEntrada [ARRAY_L];
 	volatile uint32_t arraySalida [ARRAY_L];
@@ -291,7 +294,34 @@ void Ejercicio5 (void) {
 
 	return;
 }
+/**
+ * @fn void Ejercicio6(void)
+ *
+ */
 
+
+void Ejercicio6 (void) {
+
+
+	uint32_t arrayEntrada [ARRAY_32] = {0x1234aabb, 0x2345bbcc, 0x3456ccdd, 0x45faddee};
+	uint16_t arraySalida [ARRAY_32];
+
+	uint32_t i = 0;
+
+	for ( i = 0; i < ARRAY_32; i++)
+		arraySalida [i] = 0;
+
+	pack32to16C(arrayEntrada, arraySalida, ARRAY_32);
+
+	for ( i = 0; i < ARRAY_32; i++)
+		arraySalida [i] = 0;
+
+	pack32to16ASM(arrayEntrada, arraySalida, ARRAY_32);
+
+
+
+	return;
+}
 /** @} doxygen end group definition */
 
 /*==================[end of file]============================================*/
