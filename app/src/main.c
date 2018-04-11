@@ -49,6 +49,7 @@
 #include "pack32to16.h"
 #include "max.h"
 #include "downsampleM.h"
+#include "invertir.h"
 
 /*==================[macros and definitions]=================================*/
 
@@ -108,6 +109,7 @@ static void Ejercicio5(void);
 static void Ejercicio6(void);
 static void Ejercicio7(void);
 static void Ejercicio8(void);
+static void Ejercicio9(void);
 
 
 int main(void)
@@ -124,7 +126,8 @@ int main(void)
 	// Ejercicio5();
 	// Ejercicio6();
 	// Ejercicio7();
-	Ejercicio8();
+	// Ejercicio8();
+	Ejercicio9();
 
 
 	initHardware();
@@ -381,7 +384,26 @@ void Ejercicio8 (void) {
 	return;
 }
 
+/**
+ * @fn void Ejercicio9(void)
+ *
+ */
 
+
+void Ejercicio9 (void) {
+
+	volatile uint16_t arrayEntrada [ARRAY_L];
+	uint32_t i;
+
+	for (i = 0; i < ARRAY_L; i++){
+		arrayEntrada[i] = i;
+	}
+
+	invertirC (arrayEntrada, ARRAY_L);
+	invertirASM (arrayEntrada, ARRAY_L);
+
+	return;
+}
 /** @} doxygen end group definition */
 
 /*==================[end of file]============================================*/

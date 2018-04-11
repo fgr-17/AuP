@@ -6,7 +6,7 @@
  */
 
 #include <stdint.h>
-#include "max.h"
+#include "downsampleM.h"
 
 
 /**
@@ -16,7 +16,7 @@
  *
  */
 
-uint32_t downsampleMC (uint32_t * vectorIn, uint32_t* vectorOut, uint32_t longitud, uint32_t N)
+void downsampleMC (uint32_t * vectorIn, uint32_t* vectorOut, uint32_t longitud, uint32_t N)
 {
 	uint32_t i = 0;
 	uint32_t max = 0;
