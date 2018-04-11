@@ -52,6 +52,7 @@
 #define VEC_LONGITUD 1000
 #define ARRAY_L 16
 #define ARRAY_32	4
+#define ARRAY_MAX	10
 
 
 /*==================[internal data declaration]==============================*/
@@ -101,8 +102,8 @@ static void Ejercicio2(void);
 static void Ejercicio3(void);
 static void Ejercicio4(void);
 static void Ejercicio5(void);
-
 static void Ejercicio6(void);
+static void Ejercicio7(void);
 
 int main(void)
 
@@ -116,7 +117,8 @@ int main(void)
 	// Ejercicio3();
 	// Ejercicio4();
 	// Ejercicio5();
-	Ejercicio6();
+	// Ejercicio6();
+	Ejercicio7();
 
 
 	initHardware();
@@ -322,6 +324,24 @@ void Ejercicio6 (void) {
 
 	return;
 }
+
+/**
+ * @fn void Ejercicio7(void)
+ *
+ */
+
+
+void Ejercicio7 (void) {
+
+	uint32_t array [ARRAY_MAX] = {1, 43, 22, 432, 653, 2, 887, 47, 58, 321};
+
+	uint32_t maximoC, maximoASM;
+
+	maximoC = maxC(array, ARRAY_MAX);
+
+	maximoASM = maxASM(array, ARRAY_MAX);
+}
+
 /** @} doxygen end group definition */
 
 /*==================[end of file]============================================*/

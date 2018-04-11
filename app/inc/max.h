@@ -1,12 +1,12 @@
 /*
- * pack32to16.h
+ * max.h
  *
  *  Created on: Apr 4, 2018
  *      Author: piro2
  */
 
-#ifndef APP_INC_PACK32TO16_H_
-#define APP_INC_PACK32TO16_H_
+#ifndef APP_INC_MAX_H_
+#define APP_INC_MAX_H_
 
 
 
@@ -20,12 +20,6 @@ extern "C" {
 
 /*==================[macros]=================================================*/
 
-/** @brief Mascara para quedarme con el word alto de una variable de 32 bits*/
-#define WORD_ALTO_MASCARA			(0xFFFF0000)
-/** @brief Cantidad de bits a desplazar el word alto hacia el word bajo*/
-#define DESPLAZAMIENTO_BITS			16
-
-
 /*==================[typedef]================================================*/
 
 /*==================[external data declaration]==============================*/
@@ -33,13 +27,13 @@ extern "C" {
 /*==================[external functions declaration]=========================*/
 
 /**
- * Funcion que suma dos enteros de 32 bits y devuelve el resultado
+ * Funcion que busca el maximo de un array
  * @param firstOperand primer sumando
  * @param secondOperand segundo sumando
  * @return suma
  */
-extern void pack32to16ASM 	(uint32_t * vectorIn, uint16_t * vectorOut, uint32_t longitud);
-extern void pack32to16C		(uint32_t * vectorIn, uint16_t * vectorOut, uint32_t longitud);
+extern uint32_t maxASM 	(uint32_t * vectorIn, uint32_t longitud);
+extern uint32_t maxC	(uint32_t * vectorIn, uint32_t longitud);
 
 /*==================[cplusplus]==============================================*/
 
@@ -51,4 +45,4 @@ extern void pack32to16C		(uint32_t * vectorIn, uint16_t * vectorOut, uint32_t lo
 /*==================[end of file]============================================*/
 
 
-#endif /* APP_INC_PACK32TO16_H_ */
+#endif /* APP_INC_MAX_H_ */
