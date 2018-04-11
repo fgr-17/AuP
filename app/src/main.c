@@ -51,6 +51,7 @@
 #include "downsampleM.h"
 #include "invertir.h"
 #include "eco.h"
+#include "corr.h"
 
 /*==================[macros and definitions]=================================*/
 
@@ -112,6 +113,8 @@ static void Ejercicio7(void);
 static void Ejercicio8(void);
 static void Ejercicio9(void);
 static void Ejercicio10(void);
+static void Ejercicio11(void);
+
 
 int main(void)
 
@@ -129,7 +132,8 @@ int main(void)
 	// Ejercicio7();
 	// Ejercicio8();
 	// Ejercicio9();
-	Ejercicio10();
+	// Ejercicio10();
+	Ejercicio11();
 
 	initHardware();
 
@@ -429,6 +433,33 @@ void Ejercicio10 (void) {
 	}
 
 	ecoASM (arrayEntrada, arraySalida, ARRAY_L);
+
+	return;
+}
+
+
+/**
+ * @fn void Ejercicio11(void)
+ *
+ */
+
+
+void Ejercicio11 (void) {
+
+	static int16_t x[CORR_L] = {1, 2, 3, 4, 5}; //, 6, 7, 8};
+
+	static int16_t y[CORR_L] = {0, -2, 4, -6, 8}; //, -10, 12, -14};
+
+	static int16_t vcorr[CORR_L];
+
+	uint32_t i;
+
+	for(i = 0; i < CORR_L; i++)	{
+		vcorr[i] = 0;
+	}
+
+	corrC(x, y, vcorr, CORR_L);
+
 
 	return;
 }

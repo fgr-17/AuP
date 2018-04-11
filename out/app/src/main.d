@@ -58,4 +58,4 @@ out/app/src/main.o: app/src/main.c app/inc/main.h \
  lib/lpc_chip_43xx/inc/lpc_types.h app/inc/zeros.h \
  app/inc/productoEscalar32.h app/inc/filtroVentana10.h \
  app/inc/pack32to16.h app/inc/max.h app/inc/downsampleM.h \
- app/inc/invertir.h app/inc/eco.h
+ app/inc/invertir.h app/inc/eco.h app/inc/corr.h

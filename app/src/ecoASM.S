@@ -103,10 +103,10 @@ ecoASM:
    ldr		indiceJ, =0
 
 lazo:
-   ldrh 	temp1, [vectorIn, indiceI, LSL DESP_16BITS]  			/* levanto halfword un elemento desde el comienzo */
-   ldrh 	temp2, [vectorIn, indiceJ, LSL DESP_16BITS]  			/* levanto halfword un elemento desde el final */
+   ldrsh 	temp1, [vectorIn, indiceI, LSL DESP_16BITS]  			/* levanto halfword un elemento desde el comienzo */
+   ldrsh 	temp2, [vectorIn, indiceJ, LSL DESP_16BITS]  			/* levanto halfword un elemento desde el final */
 
-   add      temp1, temp1, temp2, LSR #ATT_BITS
+   add      temp1, temp1, temp2, ASR #ATT_BITS
 
    strh		temp1, [vectorOut, indiceJ, LSL DESP_16BITS]			/* guardo el valor desde el ppio en el final */
 
