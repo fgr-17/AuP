@@ -50,6 +50,7 @@
 #include "max.h"
 #include "downsampleM.h"
 #include "invertir.h"
+#include "eco.h"
 
 /*==================[macros and definitions]=================================*/
 
@@ -110,7 +111,7 @@ static void Ejercicio6(void);
 static void Ejercicio7(void);
 static void Ejercicio8(void);
 static void Ejercicio9(void);
-
+static void Ejercicio10(void);
 
 int main(void)
 
@@ -127,8 +128,8 @@ int main(void)
 	// Ejercicio6();
 	// Ejercicio7();
 	// Ejercicio8();
-	Ejercicio9();
-
+	// Ejercicio9();
+	Ejercicio10();
 
 	initHardware();
 
@@ -361,9 +362,6 @@ void Ejercicio7 (void) {
 
 void Ejercicio8 (void) {
 
-#define M				(3)
-#define ARRAY_DS_M		((ARRAY_L  / M) + 1)
-
 	volatile uint32_t arrayEntrada [ARRAY_L];
 	volatile uint32_t arraySalida [ARRAY_DS_M];
 
@@ -404,6 +402,37 @@ void Ejercicio9 (void) {
 
 	return;
 }
+
+/**
+ * @fn void Ejercicio10(void)
+ *
+ */
+
+
+void Ejercicio10 (void) {
+
+	volatile uint16_t arrayEntrada [SGN_IN_L];
+	volatile uint16_t arraySalida [SGN_OUT_L];
+
+	uint32_t i;
+
+	for (i = 0; i < ARRAY_L; i++){
+		arrayEntrada[i] = i*2;
+		if (i < SGN_OUT_L)
+			arraySalida [i] = 0;
+	}
+
+	ecoC(arrayEntrada, arraySalida, ARRAY_L);
+
+	for (i = 0; i < SGN_OUT_L; i++){
+			arraySalida [i] = 0;
+	}
+
+	ecoASM (arrayEntrada, arraySalida, ARRAY_L);
+
+	return;
+}
+
 /** @} doxygen end group definition */
 
 /*==================[end of file]============================================*/
