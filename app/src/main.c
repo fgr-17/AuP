@@ -46,6 +46,9 @@
 #include "zeros.h"
 #include "productoEscalar32.h"
 #include "filtroVentana10.h"
+#include "pack32to16.h"
+#include "max.h"
+#include "downsampleM.h"
 
 /*==================[macros and definitions]=================================*/
 
@@ -104,6 +107,8 @@ static void Ejercicio4(void);
 static void Ejercicio5(void);
 static void Ejercicio6(void);
 static void Ejercicio7(void);
+static void Ejercicio8(void);
+
 
 int main(void)
 
@@ -118,7 +123,8 @@ int main(void)
 	// Ejercicio4();
 	// Ejercicio5();
 	// Ejercicio6();
-	Ejercicio7();
+	// Ejercicio7();
+	Ejercicio8();
 
 
 	initHardware();
@@ -341,6 +347,40 @@ void Ejercicio7 (void) {
 
 	maximoASM = maxASM(array, ARRAY_MAX);
 }
+
+
+
+/**
+ * @fn void Ejercicio8(void)
+ *
+ */
+
+
+void Ejercicio8 (void) {
+
+#define M				(3)
+#define ARRAY_DS_M		((ARRAY_L  / M) + 1)
+
+	volatile uint32_t arrayEntrada [ARRAY_L];
+	volatile uint32_t arraySalida [ARRAY_DS_M];
+
+	uint32_t i;
+
+	for (i = 0; i < ARRAY_L; i++){
+
+		arrayEntrada[i] = i;
+
+		if(i < ARRAY_DS_M)
+			arraySalida[i] = 0;
+	}
+
+	downsampleMC (arrayEntrada, arraySalida, ARRAY_L, M);
+	downsampleMASM (arrayEntrada, arraySalida, ARRAY_L, M);
+
+
+	return;
+}
+
 
 /** @} doxygen end group definition */
 
