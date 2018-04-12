@@ -460,6 +460,11 @@ void Ejercicio11 (void) {
 
 	corrC(x, y, vcorr, CORR_L);
 
+	for(i = 0; i < CORR_L; i++)	{
+		vcorr[i] = 0;
+	}
+
+	corrASM(x, y, vcorr, CORR_L);
 
 	return;
 }

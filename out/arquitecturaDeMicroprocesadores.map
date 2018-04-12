@@ -6522,7 +6522,7 @@ Discarded input sections
  .data          0x00000000        0x0 out/app/src/ecoASM.o
  .bss           0x00000000        0x0 out/app/src/ecoASM.o
  .debug_line    0x00000000       0x50 out/app/src/ecoASM.o
- .debug_info    0x00000000       0x6f out/app/src/ecoASM.o
+ .debug_info    0x00000000       0x6e out/app/src/ecoASM.o
  .debug_abbrev  0x00000000       0x14 out/app/src/ecoASM.o
  .debug_aranges
                 0x00000000       0x20 out/app/src/ecoASM.o
@@ -6538,6 +6538,8 @@ Discarded input sections
                 0x00000000       0x20 out/app/src/productoEscalar12ASM.o
  .ARM.attributes
                 0x00000000       0x25 out/app/src/productoEscalar12ASM.o
+ .data          0x00000000        0x0 out/app/src/corrASM.o
+ .bss           0x00000000        0x0 out/app/src/corrASM.o
  .text          0x00000000       0x2c out/app/src/invertirASM.o
  .data          0x00000000        0x0 out/app/src/invertirASM.o
  .bss           0x00000000        0x0 out/app/src/invertirASM.o
@@ -6717,6 +6719,7 @@ LOAD out/lib/lpc_board_ciaa_edu_4337/src/sysinit.o
 LOAD out/lib/lpc_board_ciaa_edu_4337/src/system.o
 LOAD out/app/src/ecoASM.o
 LOAD out/app/src/productoEscalar12ASM.o
+LOAD out/app/src/corrASM.o
 LOAD out/app/src/invertirASM.o
 LOAD out/app/src/productoEscalar16ASM.o
 LOAD out/app/src/suma.o
@@ -6756,7 +6759,7 @@ END GROUP
  *(.rodata.$Flash2*)
  *(.rodata.$MFlashB512*)
 
-.text           0x1a000000     0x1e00
+.text           0x1a000000     0x1e9c
  FILL mask 0xff
                 0x1a000000                __vectors_start__ = ABSOLUTE (.)
  *(.isr_vector)
@@ -6765,19 +6768,19 @@ END GROUP
                 0x1a000114                . = ALIGN (0x4)
                 0x1a000114                __section_table_start = .
                 0x1a000114                __data_section_table = .
-                0x1a000114        0x4 LONG 0x1a001e08 LOADADDR (.data)
+                0x1a000114        0x4 LONG 0x1a001ea4 LOADADDR (.data)
                 0x1a000118        0x4 LONG 0x10000000 ADDR (.data)
                 0x1a00011c        0x4 LONG 0x18 SIZEOF (.data)
-                0x1a000120        0x4 LONG 0x1a001e08 LOADADDR (.data_RAM2)
+                0x1a000120        0x4 LONG 0x1a001ea4 LOADADDR (.data_RAM2)
                 0x1a000124        0x4 LONG 0x10080000 ADDR (.data_RAM2)
                 0x1a000128        0x4 LONG 0x0 SIZEOF (.data_RAM2)
-                0x1a00012c        0x4 LONG 0x1a001e08 LOADADDR (.data_RAM3)
+                0x1a00012c        0x4 LONG 0x1a001ea4 LOADADDR (.data_RAM3)
                 0x1a000130        0x4 LONG 0x20000000 ADDR (.data_RAM3)
                 0x1a000134        0x4 LONG 0x0 SIZEOF (.data_RAM3)
-                0x1a000138        0x4 LONG 0x1a001e08 LOADADDR (.data_RAM4)
+                0x1a000138        0x4 LONG 0x1a001ea4 LOADADDR (.data_RAM4)
                 0x1a00013c        0x4 LONG 0x20008000 ADDR (.data_RAM4)
                 0x1a000140        0x4 LONG 0x0 SIZEOF (.data_RAM4)
-                0x1a000144        0x4 LONG 0x1a001e08 LOADADDR (.data_RAM5)
+                0x1a000144        0x4 LONG 0x1a001ea4 LOADADDR (.data_RAM5)
                 0x1a000148        0x4 LONG 0x2000c000 ADDR (.data_RAM5)
                 0x1a00014c        0x4 LONG 0x0 SIZEOF (.data_RAM5)
                 0x1a000150                __data_section_table_end = .
@@ -6873,204 +6876,206 @@ END GROUP
  .text.main     0x1a000310       0x28 out/app/src/main.o
                 0x1a000310                main
  .text.Ejercicio11
-                0x1a000338       0x44 out/app/src/main.o
- .text.corrC    0x1a00037c       0x84 out/app/src/corrC.o
-                0x1a00037c                corrC
+                0x1a000338       0x6c out/app/src/main.o
+ .text.corrC    0x1a0003a4       0xbc out/app/src/corrC.o
+                0x1a0003a4                corrC
  .text.Chip_UART_TXDisable
-                0x1a000400       0x18 out/lib/lpc_chip_43xx/src/uart_18xx_43xx.o
+                0x1a000460       0x18 out/lib/lpc_chip_43xx/src/uart_18xx_43xx.o
  .text.Chip_UART_SetupFIFOS
-                0x1a000418       0x1c out/lib/lpc_chip_43xx/src/uart_18xx_43xx.o
+                0x1a000478       0x1c out/lib/lpc_chip_43xx/src/uart_18xx_43xx.o
  .text.Chip_UART_ConfigData
-                0x1a000434       0x1c out/lib/lpc_chip_43xx/src/uart_18xx_43xx.o
+                0x1a000494       0x1c out/lib/lpc_chip_43xx/src/uart_18xx_43xx.o
  .text.Chip_UART_EnableDivisorAccess
-                0x1a000450       0x20 out/lib/lpc_chip_43xx/src/uart_18xx_43xx.o
+                0x1a0004b0       0x20 out/lib/lpc_chip_43xx/src/uart_18xx_43xx.o
  .text.Chip_UART_DisableDivisorAccess
-                0x1a000470       0x20 out/lib/lpc_chip_43xx/src/uart_18xx_43xx.o
+                0x1a0004d0       0x20 out/lib/lpc_chip_43xx/src/uart_18xx_43xx.o
  .text.Chip_UART_SetDivisorLatches
-                0x1a000490       0x28 out/lib/lpc_chip_43xx/src/uart_18xx_43xx.o
+                0x1a0004f0       0x28 out/lib/lpc_chip_43xx/src/uart_18xx_43xx.o
  .text.Chip_UART_GetIndex
-                0x1a0004b8       0x60 out/lib/lpc_chip_43xx/src/uart_18xx_43xx.o
+                0x1a000518       0x60 out/lib/lpc_chip_43xx/src/uart_18xx_43xx.o
  .text.Chip_UART_Init
-                0x1a000518       0x84 out/lib/lpc_chip_43xx/src/uart_18xx_43xx.o
-                0x1a000518                Chip_UART_Init
+                0x1a000578       0x84 out/lib/lpc_chip_43xx/src/uart_18xx_43xx.o
+                0x1a000578                Chip_UART_Init
  .text.Chip_UART_SetBaudFDR
-                0x1a00059c      0x174 out/lib/lpc_chip_43xx/src/uart_18xx_43xx.o
-                0x1a00059c                Chip_UART_SetBaudFDR
+                0x1a0005fc      0x174 out/lib/lpc_chip_43xx/src/uart_18xx_43xx.o
+                0x1a0005fc                Chip_UART_SetBaudFDR
  .text.Chip_Clock_DisableMainPLL
-                0x1a000710       0x1c out/lib/lpc_chip_43xx/src/sysinit_18xx_43xx.o
+                0x1a000770       0x1c out/lib/lpc_chip_43xx/src/sysinit_18xx_43xx.o
  .text.Chip_Clock_SetupMainPLL
-                0x1a00072c       0x40 out/lib/lpc_chip_43xx/src/sysinit_18xx_43xx.o
+                0x1a00078c       0x40 out/lib/lpc_chip_43xx/src/sysinit_18xx_43xx.o
  .text.Chip_Clock_MainPLLLocked
-                0x1a00076c       0x24 out/lib/lpc_chip_43xx/src/sysinit_18xx_43xx.o
+                0x1a0007cc       0x24 out/lib/lpc_chip_43xx/src/sysinit_18xx_43xx.o
  .text.Chip_SetupCoreClock
-                0x1a000790      0x15c out/lib/lpc_chip_43xx/src/sysinit_18xx_43xx.o
-                0x1a000790                Chip_SetupCoreClock
+                0x1a0007f0      0x15c out/lib/lpc_chip_43xx/src/sysinit_18xx_43xx.o
+                0x1a0007f0                Chip_SetupCoreClock
  .text.Chip_GPIO_Init
-                0x1a0008ec       0x14 out/lib/lpc_chip_43xx/src/gpio_18xx_43xx.o
-                0x1a0008ec                Chip_GPIO_Init
+                0x1a00094c       0x14 out/lib/lpc_chip_43xx/src/gpio_18xx_43xx.o
+                0x1a00094c                Chip_GPIO_Init
  .text.SystemCoreClockUpdate
-                0x1a000900       0x18 out/lib/lpc_chip_43xx/src/chip_18xx_43xx.o
-                0x1a000900                SystemCoreClockUpdate
- .text.ABS      0x1a000918       0x24 out/lib/lpc_chip_43xx/src/clock_18xx_43xx.o
+                0x1a000960       0x18 out/lib/lpc_chip_43xx/src/chip_18xx_43xx.o
+                0x1a000960                SystemCoreClockUpdate
+ .text.ABS      0x1a000978       0x24 out/lib/lpc_chip_43xx/src/clock_18xx_43xx.o
  .text.pll_calc_divs
-                0x1a00093c      0x11c out/lib/lpc_chip_43xx/src/clock_18xx_43xx.o
+                0x1a00099c      0x11c out/lib/lpc_chip_43xx/src/clock_18xx_43xx.o
  .text.pll_get_frac
-                0x1a000a58      0x178 out/lib/lpc_chip_43xx/src/clock_18xx_43xx.o
+                0x1a000ab8      0x178 out/lib/lpc_chip_43xx/src/clock_18xx_43xx.o
  .text.Chip_Clock_GetDivRate
-                0x1a000bd0       0x40 out/lib/lpc_chip_43xx/src/clock_18xx_43xx.o
+                0x1a000c30       0x40 out/lib/lpc_chip_43xx/src/clock_18xx_43xx.o
  .text.Chip_Clock_FindBaseClock
-                0x1a000c10       0x88 out/lib/lpc_chip_43xx/src/clock_18xx_43xx.o
+                0x1a000c70       0x88 out/lib/lpc_chip_43xx/src/clock_18xx_43xx.o
  .text.Chip_Clock_EnableCrystal
-                0x1a000c98       0x6c out/lib/lpc_chip_43xx/src/clock_18xx_43xx.o
-                0x1a000c98                Chip_Clock_EnableCrystal
+                0x1a000cf8       0x6c out/lib/lpc_chip_43xx/src/clock_18xx_43xx.o
+                0x1a000cf8                Chip_Clock_EnableCrystal
  .text.Chip_Clock_CalcMainPLLValue
-                0x1a000d04       0xd8 out/lib/lpc_chip_43xx/src/clock_18xx_43xx.o
-                0x1a000d04                Chip_Clock_CalcMainPLLValue
+                0x1a000d64       0xd8 out/lib/lpc_chip_43xx/src/clock_18xx_43xx.o
+                0x1a000d64                Chip_Clock_CalcMainPLLValue
  .text.Chip_Clock_GetMainPLLHz
-                0x1a000ddc       0xc0 out/lib/lpc_chip_43xx/src/clock_18xx_43xx.o
-                0x1a000ddc                Chip_Clock_GetMainPLLHz
+                0x1a000e3c       0xc0 out/lib/lpc_chip_43xx/src/clock_18xx_43xx.o
+                0x1a000e3c                Chip_Clock_GetMainPLLHz
  .text.Chip_Clock_GetDividerSource
-                0x1a000e9c       0x40 out/lib/lpc_chip_43xx/src/clock_18xx_43xx.o
-                0x1a000e9c                Chip_Clock_GetDividerSource
+                0x1a000efc       0x40 out/lib/lpc_chip_43xx/src/clock_18xx_43xx.o
+                0x1a000efc                Chip_Clock_GetDividerSource
  .text.Chip_Clock_GetDividerDivisor
-                0x1a000edc       0x38 out/lib/lpc_chip_43xx/src/clock_18xx_43xx.o
-                0x1a000edc                Chip_Clock_GetDividerDivisor
+                0x1a000f3c       0x38 out/lib/lpc_chip_43xx/src/clock_18xx_43xx.o
+                0x1a000f3c                Chip_Clock_GetDividerDivisor
  .text.Chip_Clock_GetClockInputHz
-                0x1a000f14      0x140 out/lib/lpc_chip_43xx/src/clock_18xx_43xx.o
-                0x1a000f14                Chip_Clock_GetClockInputHz
+                0x1a000f74      0x140 out/lib/lpc_chip_43xx/src/clock_18xx_43xx.o
+                0x1a000f74                Chip_Clock_GetClockInputHz
  .text.Chip_Clock_GetBaseClocktHz
-                0x1a001054       0x24 out/lib/lpc_chip_43xx/src/clock_18xx_43xx.o
-                0x1a001054                Chip_Clock_GetBaseClocktHz
+                0x1a0010b4       0x24 out/lib/lpc_chip_43xx/src/clock_18xx_43xx.o
+                0x1a0010b4                Chip_Clock_GetBaseClocktHz
  .text.Chip_Clock_SetBaseClock
-                0x1a001078       0x9c out/lib/lpc_chip_43xx/src/clock_18xx_43xx.o
-                0x1a001078                Chip_Clock_SetBaseClock
+                0x1a0010d8       0x9c out/lib/lpc_chip_43xx/src/clock_18xx_43xx.o
+                0x1a0010d8                Chip_Clock_SetBaseClock
  .text.Chip_Clock_GetBaseClock
-                0x1a001114       0x4c out/lib/lpc_chip_43xx/src/clock_18xx_43xx.o
-                0x1a001114                Chip_Clock_GetBaseClock
+                0x1a001174       0x4c out/lib/lpc_chip_43xx/src/clock_18xx_43xx.o
+                0x1a001174                Chip_Clock_GetBaseClock
  .text.Chip_Clock_EnableOpts
-                0x1a001160       0x7c out/lib/lpc_chip_43xx/src/clock_18xx_43xx.o
-                0x1a001160                Chip_Clock_EnableOpts
+                0x1a0011c0       0x7c out/lib/lpc_chip_43xx/src/clock_18xx_43xx.o
+                0x1a0011c0                Chip_Clock_EnableOpts
  .text.Chip_Clock_GetRate
-                0x1a0011dc       0x88 out/lib/lpc_chip_43xx/src/clock_18xx_43xx.o
-                0x1a0011dc                Chip_Clock_GetRate
- .text.fpuInit  0x1a001264       0x74 out/lib/lpc_chip_43xx/src/fpu_init.o
-                0x1a001264                fpuInit
+                0x1a00123c       0x88 out/lib/lpc_chip_43xx/src/clock_18xx_43xx.o
+                0x1a00123c                Chip_Clock_GetRate
+ .text.fpuInit  0x1a0012c4       0x74 out/lib/lpc_chip_43xx/src/fpu_init.o
+                0x1a0012c4                fpuInit
  .text.ResetISR
-                0x1a0012d8       0xc4 out/lib/lpc_board_ciaa_edu_4337/src/cr_startup_lpc43xx.o
-                0x1a0012d8                ResetISR
+                0x1a001338       0xc4 out/lib/lpc_board_ciaa_edu_4337/src/cr_startup_lpc43xx.o
+                0x1a001338                ResetISR
  .text.Chip_SCU_PinMuxSet
-                0x1a00139c       0x30 out/lib/lpc_board_ciaa_edu_4337/src/board_sysinit.o
+                0x1a0013fc       0x30 out/lib/lpc_board_ciaa_edu_4337/src/board_sysinit.o
  .text.Chip_SCU_SetPinMuxing
-                0x1a0013cc       0x48 out/lib/lpc_board_ciaa_edu_4337/src/board_sysinit.o
+                0x1a00142c       0x48 out/lib/lpc_board_ciaa_edu_4337/src/board_sysinit.o
  .text.Chip_CREG_SetFlashAcceleration
-                0x1a001414       0x54 out/lib/lpc_board_ciaa_edu_4337/src/board_sysinit.o
+                0x1a001474       0x54 out/lib/lpc_board_ciaa_edu_4337/src/board_sysinit.o
  .text.Board_SetupMuxing
-                0x1a001468       0x14 out/lib/lpc_board_ciaa_edu_4337/src/board_sysinit.o
-                0x1a001468                Board_SetupMuxing
+                0x1a0014c8       0x14 out/lib/lpc_board_ciaa_edu_4337/src/board_sysinit.o
+                0x1a0014c8                Board_SetupMuxing
  .text.Board_SetupClocking
-                0x1a00147c       0x80 out/lib/lpc_board_ciaa_edu_4337/src/board_sysinit.o
-                0x1a00147c                Board_SetupClocking
+                0x1a0014dc       0x80 out/lib/lpc_board_ciaa_edu_4337/src/board_sysinit.o
+                0x1a0014dc                Board_SetupClocking
  .text.Board_SystemInit
-                0x1a0014fc       0x10 out/lib/lpc_board_ciaa_edu_4337/src/board_sysinit.o
-                0x1a0014fc                Board_SystemInit
+                0x1a00155c       0x10 out/lib/lpc_board_ciaa_edu_4337/src/board_sysinit.o
+                0x1a00155c                Board_SystemInit
  .text.Chip_SCU_PinMuxSet
-                0x1a00150c       0x30 out/lib/lpc_board_ciaa_edu_4337/src/board.o
+                0x1a00156c       0x30 out/lib/lpc_board_ciaa_edu_4337/src/board.o
  .text.Chip_ENET_RMIIEnable
-                0x1a00153c       0x28 out/lib/lpc_board_ciaa_edu_4337/src/board.o
+                0x1a00159c       0x28 out/lib/lpc_board_ciaa_edu_4337/src/board.o
  .text.Chip_GPIO_SetPinState
-                0x1a001564       0x38 out/lib/lpc_board_ciaa_edu_4337/src/board.o
+                0x1a0015c4       0x38 out/lib/lpc_board_ciaa_edu_4337/src/board.o
  .text.Chip_GPIO_SetPinDIROutput
-                0x1a00159c       0x3c out/lib/lpc_board_ciaa_edu_4337/src/board.o
+                0x1a0015fc       0x3c out/lib/lpc_board_ciaa_edu_4337/src/board.o
  .text.Chip_UART_TXEnable
-                0x1a0015d8       0x18 out/lib/lpc_board_ciaa_edu_4337/src/board.o
+                0x1a001638       0x18 out/lib/lpc_board_ciaa_edu_4337/src/board.o
  .text.Chip_UART_ConfigData
-                0x1a0015f0       0x1c out/lib/lpc_board_ciaa_edu_4337/src/board.o
+                0x1a001650       0x1c out/lib/lpc_board_ciaa_edu_4337/src/board.o
  .text.Board_UART_Init
-                0x1a00160c       0x24 out/lib/lpc_board_ciaa_edu_4337/src/board.o
-                0x1a00160c                Board_UART_Init
+                0x1a00166c       0x24 out/lib/lpc_board_ciaa_edu_4337/src/board.o
+                0x1a00166c                Board_UART_Init
  .text.Board_Debug_Init
-                0x1a001630       0x30 out/lib/lpc_board_ciaa_edu_4337/src/board.o
-                0x1a001630                Board_Debug_Init
+                0x1a001690       0x30 out/lib/lpc_board_ciaa_edu_4337/src/board.o
+                0x1a001690                Board_Debug_Init
  .text.Board_LED_Init
-                0x1a001660       0x5c out/lib/lpc_board_ciaa_edu_4337/src/board.o
+                0x1a0016c0       0x5c out/lib/lpc_board_ciaa_edu_4337/src/board.o
  .text.Board_Init
-                0x1a0016bc       0x24 out/lib/lpc_board_ciaa_edu_4337/src/board.o
-                0x1a0016bc                Board_Init
+                0x1a00171c       0x24 out/lib/lpc_board_ciaa_edu_4337/src/board.o
+                0x1a00171c                Board_Init
  .text.SystemInit
-                0x1a0016e0       0x1c out/lib/lpc_board_ciaa_edu_4337/src/sysinit.o
-                0x1a0016e0                SystemInit
- .text          0x1a0016fc        0x6 out/app/src/suma.o
-                0x1a0016fc                asmSum
- *fill*         0x1a001702        0x2 
- .text          0x1a001704       0x30 /home/piro2/ciaa-ide/gcc-arm-none-eabi-4_9-2015q1/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m/fpu/libgcc.a(_aeabi_uldivmod.o)
-                0x1a001704                __aeabi_uldivmod
- .text          0x1a001734       0x60 /home/piro2/ciaa-ide/gcc-arm-none-eabi-4_9-2015q1/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m/fpu/libgcc.a(bpabi.o)
-                0x1a001734                __gnu_ldivmod_helper
-                0x1a001764                __gnu_uldivmod_helper
- .text          0x1a001794        0x4 /home/piro2/ciaa-ide/gcc-arm-none-eabi-4_9-2015q1/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m/fpu/libgcc.a(_dvmd_tls.o)
-                0x1a001794                __aeabi_ldiv0
-                0x1a001794                __aeabi_idiv0
- .text          0x1a001798      0x29c /home/piro2/ciaa-ide/gcc-arm-none-eabi-4_9-2015q1/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m/fpu/libgcc.a(_divdi3.o)
-                0x1a001798                __divdi3
- .text          0x1a001a34      0x26c /home/piro2/ciaa-ide/gcc-arm-none-eabi-4_9-2015q1/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m/fpu/libgcc.a(_udivdi3.o)
-                0x1a001a34                __udivdi3
- .text.memset   0x1a001ca0       0x10 /home/piro2/ciaa-ide/gcc-arm-none-eabi-4_9-2015q1/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu/libc_nano.a(lib_a-memset.o)
-                0x1a001ca0                memset
+                0x1a001740       0x1c out/lib/lpc_board_ciaa_edu_4337/src/sysinit.o
+                0x1a001740                SystemInit
+ .text          0x1a00175c       0x3c out/app/src/corrASM.o
+                0x1a00175c                corrASM
+ .text          0x1a001798        0x6 out/app/src/suma.o
+                0x1a001798                asmSum
+ *fill*         0x1a00179e        0x2 
+ .text          0x1a0017a0       0x30 /home/piro2/ciaa-ide/gcc-arm-none-eabi-4_9-2015q1/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m/fpu/libgcc.a(_aeabi_uldivmod.o)
+                0x1a0017a0                __aeabi_uldivmod
+ .text          0x1a0017d0       0x60 /home/piro2/ciaa-ide/gcc-arm-none-eabi-4_9-2015q1/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m/fpu/libgcc.a(bpabi.o)
+                0x1a0017d0                __gnu_ldivmod_helper
+                0x1a001800                __gnu_uldivmod_helper
+ .text          0x1a001830        0x4 /home/piro2/ciaa-ide/gcc-arm-none-eabi-4_9-2015q1/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m/fpu/libgcc.a(_dvmd_tls.o)
+                0x1a001830                __aeabi_ldiv0
+                0x1a001830                __aeabi_idiv0
+ .text          0x1a001834      0x29c /home/piro2/ciaa-ide/gcc-arm-none-eabi-4_9-2015q1/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m/fpu/libgcc.a(_divdi3.o)
+                0x1a001834                __divdi3
+ .text          0x1a001ad0      0x26c /home/piro2/ciaa-ide/gcc-arm-none-eabi-4_9-2015q1/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m/fpu/libgcc.a(_udivdi3.o)
+                0x1a001ad0                __udivdi3
+ .text.memset   0x1a001d3c       0x10 /home/piro2/ciaa-ide/gcc-arm-none-eabi-4_9-2015q1/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu/libc_nano.a(lib_a-memset.o)
+                0x1a001d3c                memset
  *(.rodata .rodata.* .constdata .constdata.*)
  .rodata.UART_PClock
-                0x1a001cb0        0x8 out/lib/lpc_chip_43xx/src/uart_18xx_43xx.o
+                0x1a001d4c        0x8 out/lib/lpc_chip_43xx/src/uart_18xx_43xx.o
  .rodata.UART_BClock
-                0x1a001cb8        0x8 out/lib/lpc_chip_43xx/src/uart_18xx_43xx.o
+                0x1a001d54        0x8 out/lib/lpc_chip_43xx/src/uart_18xx_43xx.o
  .rodata.InitClkStates
-                0x1a001cc0       0x48 out/lib/lpc_chip_43xx/src/sysinit_18xx_43xx.o
+                0x1a001d5c       0x48 out/lib/lpc_chip_43xx/src/sysinit_18xx_43xx.o
  .rodata.periph_to_base
-                0x1a001d08       0x6c out/lib/lpc_chip_43xx/src/clock_18xx_43xx.o
- .rodata        0x1a001d74        0xc out/lib/lpc_chip_43xx/src/clock_18xx_43xx.o
+                0x1a001da4       0x6c out/lib/lpc_chip_43xx/src/clock_18xx_43xx.o
+ .rodata        0x1a001e10        0xc out/lib/lpc_chip_43xx/src/clock_18xx_43xx.o
  .rodata.InitClkStates
-                0x1a001d80        0xc out/lib/lpc_board_ciaa_edu_4337/src/board_sysinit.o
+                0x1a001e1c        0xc out/lib/lpc_board_ciaa_edu_4337/src/board_sysinit.o
  .rodata.pinmuxing
-                0x1a001d8c       0x60 out/lib/lpc_board_ciaa_edu_4337/src/board_sysinit.o
+                0x1a001e28       0x60 out/lib/lpc_board_ciaa_edu_4337/src/board_sysinit.o
  .rodata.ExtRateIn
-                0x1a001dec        0x4 out/lib/lpc_board_ciaa_edu_4337/src/board.o
-                0x1a001dec                ExtRateIn
+                0x1a001e88        0x4 out/lib/lpc_board_ciaa_edu_4337/src/board.o
+                0x1a001e88                ExtRateIn
  .rodata.OscRateIn
-                0x1a001df0        0x4 out/lib/lpc_board_ciaa_edu_4337/src/board.o
-                0x1a001df0                OscRateIn
+                0x1a001e8c        0x4 out/lib/lpc_board_ciaa_edu_4337/src/board.o
+                0x1a001e8c                OscRateIn
  .rodata.gpioLEDBits
-                0x1a001df4        0xc out/lib/lpc_board_ciaa_edu_4337/src/board.o
-                0x1a001e00                . = ALIGN (0x4)
+                0x1a001e90        0xc out/lib/lpc_board_ciaa_edu_4337/src/board.o
+                0x1a001e9c                . = ALIGN (0x4)
 
-.glue_7         0x1a001e00        0x0
+.glue_7         0x1a001e9c        0x0
  .glue_7        0x00000000        0x0 linker stubs
 
-.glue_7t        0x1a001e00        0x0
+.glue_7t        0x1a001e9c        0x0
  .glue_7t       0x00000000        0x0 linker stubs
 
-.vfp11_veneer   0x1a001e00        0x0
+.vfp11_veneer   0x1a001e9c        0x0
  .vfp11_veneer  0x00000000        0x0 linker stubs
 
-.v4_bx          0x1a001e00        0x0
+.v4_bx          0x1a001e9c        0x0
  .v4_bx         0x00000000        0x0 linker stubs
 
-.iplt           0x1a001e00        0x0
+.iplt           0x1a001e9c        0x0
  .iplt          0x00000000        0x0 out/app/src/downsampleMC.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x1a001e00                __exidx_start = .
+                0x1a001e9c                __exidx_start = .
 
-.ARM.exidx      0x1a001e00        0x8
+.ARM.exidx      0x1a001e9c        0x8
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
- .ARM.exidx     0x1a001e00        0x8 /home/piro2/ciaa-ide/gcc-arm-none-eabi-4_9-2015q1/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m/fpu/libgcc.a(_divdi3.o)
- .ARM.exidx     0x1a001e08        0x0 /home/piro2/ciaa-ide/gcc-arm-none-eabi-4_9-2015q1/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m/fpu/libgcc.a(_udivdi3.o)
+ .ARM.exidx     0x1a001e9c        0x8 /home/piro2/ciaa-ide/gcc-arm-none-eabi-4_9-2015q1/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m/fpu/libgcc.a(_divdi3.o)
+ .ARM.exidx     0x1a001ea4        0x0 /home/piro2/ciaa-ide/gcc-arm-none-eabi-4_9-2015q1/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m/fpu/libgcc.a(_udivdi3.o)
                                   0x8 (size before relaxing)
-                0x1a001e08                __exidx_end = .
-                0x1a001e08                _etext = .
+                0x1a001ea4                __exidx_end = .
+                0x1a001ea4                _etext = .
 
-.rel.dyn        0x1a001e08        0x0
+.rel.dyn        0x1a001ea4        0x0
  .rel.iplt      0x00000000        0x0 out/app/src/downsampleMC.o
 
-.data_RAM2      0x10080000        0x0 load address 0x1a001e08
+.data_RAM2      0x10080000        0x0 load address 0x1a001ea4
  FILL mask 0xff
  *(.ramfunc.$RAM2)
  *(.ramfunc.$RamLoc40)
@@ -7078,7 +7083,7 @@ END GROUP
  *(.data.$RamLoc40*)
                 0x10080000                . = ALIGN (0x4)
 
-.data_RAM3      0x20000000        0x0 load address 0x1a001e08
+.data_RAM3      0x20000000        0x0 load address 0x1a001ea4
  FILL mask 0xff
  *(.ramfunc.$RAM3)
  *(.ramfunc.$RamAHB32)
@@ -7086,7 +7091,7 @@ END GROUP
  *(.data.$RamAHB32*)
                 0x20000000                . = ALIGN (0x4)
 
-.data_RAM4      0x20008000        0x0 load address 0x1a001e08
+.data_RAM4      0x20008000        0x0 load address 0x1a001ea4
  FILL mask 0xff
  *(.ramfunc.$RAM4)
  *(.ramfunc.$RamAHB16)
@@ -7094,7 +7099,7 @@ END GROUP
  *(.data.$RamAHB16*)
                 0x20008000                . = ALIGN (0x4)
 
-.data_RAM5      0x2000c000        0x0 load address 0x1a001e08
+.data_RAM5      0x2000c000        0x0 load address 0x1a001ea4
  FILL mask 0xff
  *(.ramfunc.$RAM5)
  *(.ramfunc.$RamAHB_ETB16)
@@ -7108,7 +7113,7 @@ END GROUP
                 0x10000000                . = ALIGN (0x4)
                 0x10000000                _end_uninit_RESERVED = .
 
-.data           0x10000000       0x18 load address 0x1a001e08
+.data           0x10000000       0x18 load address 0x1a001ea4
  FILL mask 0xff
                 0x10000000                _data = .
  *(vtable)
@@ -7119,7 +7124,7 @@ END GROUP
                 0x10000018                . = ALIGN (0x4)
                 0x10000018                _edata = .
 
-.igot.plt       0x10000018        0x0 load address 0x1a001e20
+.igot.plt       0x10000018        0x0 load address 0x1a001ebc
  .igot.plt      0x00000000        0x0 out/app/src/downsampleMC.o
 
 .bss_RAM2       0x10080000        0x0
@@ -7185,7 +7190,7 @@ END GROUP
                 0x10008000                PROVIDE (_vStackTop, (__top_RamLoc32 - 0x0))
 OUTPUT(out/arquitecturaDeMicroprocesadores.elf elf32-littlearm)
 
-.debug_info     0x00000000     0x6f2f
+.debug_info     0x00000000     0x6f9e
  .debug_info    0x00000000      0xaae out/app/src/main.o
  .debug_info    0x00000aae      0x12c out/app/src/corrC.o
  .debug_info    0x00000bda     0x10d8 out/lib/lpc_chip_43xx/src/uart_18xx_43xx.o
@@ -7199,9 +7204,10 @@ OUTPUT(out/arquitecturaDeMicroprocesadores.elf elf32-littlearm)
  .debug_info    0x0000590b       0x3f out/lib/lpc_board_ciaa_edu_4337/src/crp.o
  .debug_info    0x0000594a     0x14a3 out/lib/lpc_board_ciaa_edu_4337/src/board.o
  .debug_info    0x00006ded       0xd6 out/lib/lpc_board_ciaa_edu_4337/src/sysinit.o
- .debug_info    0x00006ec3       0x6c out/app/src/suma.o
+ .debug_info    0x00006ec3       0x6f out/app/src/corrASM.o
+ .debug_info    0x00006f32       0x6c out/app/src/suma.o
 
-.debug_abbrev   0x00000000     0x11e9
+.debug_abbrev   0x00000000     0x11fd
  .debug_abbrev  0x00000000      0x1c6 out/app/src/main.o
  .debug_abbrev  0x000001c6       0x7b out/app/src/corrC.o
  .debug_abbrev  0x00000241      0x2ac out/lib/lpc_chip_43xx/src/uart_18xx_43xx.o
@@ -7215,9 +7221,10 @@ OUTPUT(out/arquitecturaDeMicroprocesadores.elf elf32-littlearm)
  .debug_abbrev  0x00000e85       0x36 out/lib/lpc_board_ciaa_edu_4337/src/crp.o
  .debug_abbrev  0x00000ebb      0x296 out/lib/lpc_board_ciaa_edu_4337/src/board.o
  .debug_abbrev  0x00001151       0x84 out/lib/lpc_board_ciaa_edu_4337/src/sysinit.o
- .debug_abbrev  0x000011d5       0x14 out/app/src/suma.o
+ .debug_abbrev  0x000011d5       0x14 out/app/src/corrASM.o
+ .debug_abbrev  0x000011e9       0x14 out/app/src/suma.o
 
-.debug_aranges  0x00000000      0x620
+.debug_aranges  0x00000000      0x640
  .debug_aranges
                 0x00000000       0x80 out/app/src/main.o
  .debug_aranges
@@ -7245,7 +7252,9 @@ OUTPUT(out/arquitecturaDeMicroprocesadores.elf elf32-littlearm)
  .debug_aranges
                 0x000005e0       0x20 out/lib/lpc_board_ciaa_edu_4337/src/sysinit.o
  .debug_aranges
-                0x00000600       0x20 out/app/src/suma.o
+                0x00000600       0x20 out/app/src/corrASM.o
+ .debug_aranges
+                0x00000620       0x20 out/app/src/suma.o
 
 .debug_ranges   0x00000000      0x528
  .debug_ranges  0x00000000       0x70 out/app/src/main.o
@@ -7347,28 +7356,29 @@ OUTPUT(out/arquitecturaDeMicroprocesadores.elf elf32-littlearm)
  .debug_macro   0x00005d45       0x16 out/lib/lpc_board_ciaa_edu_4337/src/board.o
  .debug_macro   0x00005d5b      0x3e7 out/lib/lpc_board_ciaa_edu_4337/src/sysinit.o
 
-.debug_line     0x00000000     0x53ec
- .debug_line    0x00000000      0xa49 out/app/src/main.o
- .debug_line    0x00000a49      0x200 out/app/src/corrC.o
- .debug_line    0x00000c49      0x9c4 out/lib/lpc_chip_43xx/src/uart_18xx_43xx.o
- .debug_line    0x0000160d      0x75c out/lib/lpc_chip_43xx/src/sysinit_18xx_43xx.o
- .debug_line    0x00001d69      0x73b out/lib/lpc_chip_43xx/src/gpio_18xx_43xx.o
- .debug_line    0x000024a4      0x6ea out/lib/lpc_chip_43xx/src/chip_18xx_43xx.o
- .debug_line    0x00002b8e      0xae3 out/lib/lpc_chip_43xx/src/clock_18xx_43xx.o
- .debug_line    0x00003671      0x29a out/lib/lpc_chip_43xx/src/fpu_init.o
- .debug_line    0x0000390b      0x111 out/lib/lpc_board_ciaa_edu_4337/src/cr_startup_lpc43xx.o
- .debug_line    0x00003a1c      0x801 out/lib/lpc_board_ciaa_edu_4337/src/board_sysinit.o
- .debug_line    0x0000421d       0x46 out/lib/lpc_board_ciaa_edu_4337/src/crp.o
- .debug_line    0x00004263      0x9d7 out/lib/lpc_board_ciaa_edu_4337/src/board.o
- .debug_line    0x00004c3a      0x771 out/lib/lpc_board_ciaa_edu_4337/src/sysinit.o
- .debug_line    0x000053ab       0x41 out/app/src/suma.o
+.debug_line     0x00000000     0x5454
+ .debug_line    0x00000000      0xa5c out/app/src/main.o
+ .debug_line    0x00000a5c      0x1ff out/app/src/corrC.o
+ .debug_line    0x00000c5b      0x9c4 out/lib/lpc_chip_43xx/src/uart_18xx_43xx.o
+ .debug_line    0x0000161f      0x75c out/lib/lpc_chip_43xx/src/sysinit_18xx_43xx.o
+ .debug_line    0x00001d7b      0x73b out/lib/lpc_chip_43xx/src/gpio_18xx_43xx.o
+ .debug_line    0x000024b6      0x6ea out/lib/lpc_chip_43xx/src/chip_18xx_43xx.o
+ .debug_line    0x00002ba0      0xae3 out/lib/lpc_chip_43xx/src/clock_18xx_43xx.o
+ .debug_line    0x00003683      0x29a out/lib/lpc_chip_43xx/src/fpu_init.o
+ .debug_line    0x0000391d      0x111 out/lib/lpc_board_ciaa_edu_4337/src/cr_startup_lpc43xx.o
+ .debug_line    0x00003a2e      0x801 out/lib/lpc_board_ciaa_edu_4337/src/board_sysinit.o
+ .debug_line    0x0000422f       0x46 out/lib/lpc_board_ciaa_edu_4337/src/crp.o
+ .debug_line    0x00004275      0x9d7 out/lib/lpc_board_ciaa_edu_4337/src/board.o
+ .debug_line    0x00004c4c      0x771 out/lib/lpc_board_ciaa_edu_4337/src/sysinit.o
+ .debug_line    0x000053bd       0x56 out/app/src/corrASM.o
+ .debug_line    0x00005413       0x41 out/app/src/suma.o
 
 .debug_str      0x00000000    0x19a6b
- .debug_str     0x00000000    0x180e4 out/app/src/main.o
-                              0x18334 (size before relaxing)
- .debug_str     0x000180e4       0x3a out/app/src/corrC.o
+ .debug_str     0x00000000    0x180e3 out/app/src/main.o
+                              0x18333 (size before relaxing)
+ .debug_str     0x000180e3       0x70 out/app/src/corrC.o
                                0x3033 (size before relaxing)
- .debug_str     0x0001811e      0x493 out/lib/lpc_chip_43xx/src/uart_18xx_43xx.o
+ .debug_str     0x00018153      0x45e out/lib/lpc_chip_43xx/src/uart_18xx_43xx.o
                               0x1520c (size before relaxing)
  .debug_str     0x000185b1      0x2f6 out/lib/lpc_chip_43xx/src/sysinit_18xx_43xx.o
                               0x15093 (size before relaxing)
@@ -7436,19 +7446,21 @@ OUTPUT(out/arquitecturaDeMicroprocesadores.elf elf32-littlearm)
  .ARM.attributes
                 0x000002ac       0x39 out/lib/lpc_board_ciaa_edu_4337/src/sysinit.o
  .ARM.attributes
-                0x000002e5       0x25 out/app/src/suma.o
+                0x000002e5       0x25 out/app/src/corrASM.o
  .ARM.attributes
-                0x0000030a       0x22 /home/piro2/ciaa-ide/gcc-arm-none-eabi-4_9-2015q1/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m/fpu/libgcc.a(_aeabi_uldivmod.o)
+                0x0000030a       0x25 out/app/src/suma.o
  .ARM.attributes
-                0x0000032c       0x34 /home/piro2/ciaa-ide/gcc-arm-none-eabi-4_9-2015q1/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m/fpu/libgcc.a(bpabi.o)
+                0x0000032f       0x22 /home/piro2/ciaa-ide/gcc-arm-none-eabi-4_9-2015q1/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m/fpu/libgcc.a(_aeabi_uldivmod.o)
  .ARM.attributes
-                0x00000360       0x22 /home/piro2/ciaa-ide/gcc-arm-none-eabi-4_9-2015q1/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m/fpu/libgcc.a(_dvmd_tls.o)
+                0x00000351       0x34 /home/piro2/ciaa-ide/gcc-arm-none-eabi-4_9-2015q1/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m/fpu/libgcc.a(bpabi.o)
  .ARM.attributes
-                0x00000382       0x34 /home/piro2/ciaa-ide/gcc-arm-none-eabi-4_9-2015q1/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m/fpu/libgcc.a(_divdi3.o)
+                0x00000385       0x22 /home/piro2/ciaa-ide/gcc-arm-none-eabi-4_9-2015q1/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m/fpu/libgcc.a(_dvmd_tls.o)
  .ARM.attributes
-                0x000003b6       0x34 /home/piro2/ciaa-ide/gcc-arm-none-eabi-4_9-2015q1/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m/fpu/libgcc.a(_udivdi3.o)
+                0x000003a7       0x34 /home/piro2/ciaa-ide/gcc-arm-none-eabi-4_9-2015q1/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m/fpu/libgcc.a(_divdi3.o)
  .ARM.attributes
-                0x000003ea       0x34 /home/piro2/ciaa-ide/gcc-arm-none-eabi-4_9-2015q1/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu/libc_nano.a(lib_a-memset.o)
+                0x000003db       0x34 /home/piro2/ciaa-ide/gcc-arm-none-eabi-4_9-2015q1/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m/fpu/libgcc.a(_udivdi3.o)
+ .ARM.attributes
+                0x0000040f       0x34 /home/piro2/ciaa-ide/gcc-arm-none-eabi-4_9-2015q1/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu/libc_nano.a(lib_a-memset.o)
 
 .debug_frame    0x00000000     0x1768
  .debug_frame   0x00000000      0x1ec out/app/src/main.o
@@ -7982,6 +7994,8 @@ asmSum                                            out/app/src/suma.o
 bss_init                                          out/lib/lpc_board_ciaa_edu_4337/src/cr_startup_lpc43xx.o
 ciclos_asm                                        out/app/src/main.o
 ciclos_c                                          out/app/src/main.o
+corrASM                                           out/app/src/corrASM.o
+                                                  out/app/src/main.o
 corrC                                             out/app/src/corrC.o
                                                   out/app/src/main.o
 data_init                                         out/lib/lpc_board_ciaa_edu_4337/src/cr_startup_lpc43xx.o
