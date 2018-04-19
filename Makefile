@@ -64,7 +64,7 @@ $(OUT)/%.o: %.c
 	@mkdir -p $(dir $@)
 	$(Q)$(CC) -MMD $(CFLAGS) -c -o $@ $<
 
-$(OUT)/%.o: %.s
+$(OUT)/%.o: %.S
 	@echo AS $<
 	@mkdir -p $(dir $@)
 	$(Q)$(AS) -MMD $(CFLAGS) -c -o $@ $<

@@ -418,7 +418,11 @@ void Ejercicio10 (void) {
 	volatile uint16_t arrayEntrada [SGN_IN_L];
 	volatile uint16_t arraySalida [SGN_OUT_L];
 
+	volatile ciclosC, ciclosASM, ciclosSIMD;
+
 	uint32_t i;
+
+	*DWT_CTRL |= 1;
 
 	for (i = 0; i < ARRAY_L; i++){
 		arrayEntrada[i] = i*2;
@@ -426,13 +430,26 @@ void Ejercicio10 (void) {
 			arraySalida [i] = 0;
 	}
 
+	*DWT_CYCCNT = 0;
 	ecoC(arrayEntrada, arraySalida, ARRAY_L);
+	ciclosC = *DWT_CYCCNT;
 
 	for (i = 0; i < SGN_OUT_L; i++){
 			arraySalida [i] = 0;
 	}
 
+	*DWT_CYCCNT = 0;
 	ecoASM (arrayEntrada, arraySalida, ARRAY_L);
+	ciclosASM = *DWT_CYCCNT;
+
+	for (i = 0; i < SGN_OUT_L; i++){
+			arraySalida [i] = 0;
+	}
+
+	*DWT_CYCCNT = 0;
+	ecoSIMD (arrayEntrada, arraySalida, ARRAY_L);
+	ciclosSIMD = *DWT_CYCCNT;
+
 
 	return;
 }
@@ -453,18 +470,36 @@ void Ejercicio11 (void) {
 	static int16_t vcorr[CORR_L];
 
 	uint32_t i;
+	int32_t cuentaC, cuentaASM, cuentaSIMD, cuentaSIMD2, cuentaSIMD3;
+
+	*DWT_CTRL |= 1;
+
 
 	for(i = 0; i < CORR_L; i++)	{
 		vcorr[i] = 0;
 	}
 
+
+	*DWT_CYCCNT = 0;
 	corrC(x, y, vcorr, CORR_L);
+	cuentaC = *DWT_CYCCNT;
+
 
 	for(i = 0; i < CORR_L; i++)	{
 		vcorr[i] = 0;
 	}
 
+	*DWT_CYCCNT = 0;
 	corrASM(x, y, vcorr, CORR_L);
+	cuentaASM = *DWT_CYCCNT;
+
+
+	for(i = 0; i < CORR_L; i++)	{
+		vcorr[i] = 0;
+	}
+	*DWT_CYCCNT = 0;
+	corrSIMD(x, y, vcorr, CORR_L);
+	cuentaSIMD = *DWT_CYCCNT;
 
 	return;
 }

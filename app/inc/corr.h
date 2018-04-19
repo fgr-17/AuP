@@ -46,6 +46,7 @@ instrucciones SIMD
  * @param secondOperand segundo sumando
  * @return
  */
+extern void corrSIMD (int16_t * vectorX, int16_t* vectorY,int16_t* vectorCorr, uint32_t longitud);
 extern void corrASM (int16_t * vectorX, int16_t* vectorY,int16_t* vectorCorr, uint32_t longitud);
 extern void corrC   (int16_t * vectorX, int16_t* vectorY,int16_t* vectorCorr, uint32_t longitud);
 

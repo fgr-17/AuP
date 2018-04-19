@@ -65,6 +65,7 @@ extern "C" {
  * @return
  */
 extern void ecoASM (int16_t * vectorIn, int16_t* vectorOut, uint32_t longitud);
+extern void ecoSIMD (int16_t * vectorIn, int16_t* vectorOut, uint32_t longitud);
 extern void ecoC (int16_t * vectorIn, int16_t* vectorOut, uint32_t longitud);
 
 /*==================[cplusplus]==============================================*/
