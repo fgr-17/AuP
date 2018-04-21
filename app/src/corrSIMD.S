@@ -140,8 +140,8 @@ lazo_l:
 	   blo		lazo_n
 
 	   cmp		primerByte, 0
-	   b		cierro_lazo_l
-	   mla		acc, muestraX1, muestraY1, acc
+	   bne		cierro_lazo_l
+	   mla	acc, muestraX1, muestraY1, acc
 
 
 cierro_lazo_l:
