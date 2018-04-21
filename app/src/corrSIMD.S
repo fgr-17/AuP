@@ -126,12 +126,12 @@ lazo_l:
 
 	segundo_byte:
 
-	   ldrh	muestraX2, [vectorX, indiceN, LSL DESP_16BITS]  			/* levanto halfword un elemento desde el comienzo */
-	   ldrh	muestraY2, [vectorY, indiceY, LSL DESP_16BITS]  			/* levanto halfword un elemento desde el final */
+	   ldrh		muestraX2, [vectorX, indiceN, LSL DESP_16BITS]  			/* levanto halfword un elemento desde el comienzo */
+	   ldrh		muestraY2, [vectorY, indiceY, LSL DESP_16BITS]  			/* levanto halfword un elemento desde el final */
 	   add		muestraX2, muestraX2, muestraX1, LSL #16					// sumo y dejo empaquetado las dos muestras
 	   add		muestraY2, muestraY2, muestraY1, LSL #16					// sumo y dejo empaquetado las dos muestras
 	   ldr		primerByte, =1
-	   smlaw	acc, muestraX2, muestraY2, acc
+	   smlad	acc, muestraX2, muestraY2, acc
 
 	cierro_lazo_n:
 
