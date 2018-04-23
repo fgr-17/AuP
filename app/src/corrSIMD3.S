@@ -79,15 +79,15 @@
 #define vectorCorr		r2
 #define longitud		r3
 
-#define primerByte		r4
+#define 			r4
 #define indiceL			r5
 #define indiceN			r6
 #define acc				r7
 #define muestraX1		r8
 #define muestraY1		r9
 #define indiceY			r10
-#define muestraX2		r11
-#define muestraY2		r12
+#define 		r11
+#define 		r12
 
 /** @brief bits a desplazar en punteros de 16 bits */
 #define DESP_16BITS		1
@@ -99,7 +99,8 @@
 corrSIMD2:
 
    push 	{primerByte - muestraY2, lr}  													/* guardamos la direccion de retorno en la pila */
-   ldr		indiceL, =0
+   mov		indiceN, longitud
+   sub		indiceN, 2
 
 lazo_l:
 
@@ -107,8 +108,17 @@ lazo_l:
    //ldr		indiceN, =0
 
    bic		acc, #0xFFFFFFFF
-   bic		indiceN, #0xFFFFFFFF
-   bic		primerByte, #0xFFFFFFFF
+   // bic		indiceN, #0xFFFFFFFF
+
+
+   lazo_n:
+
+      ldr   muestraX, [vectorX, indiceN, LSL DESP_16BITS]
+
+
+
+
+
 
 	lazo_n:
 
