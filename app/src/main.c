@@ -501,6 +501,15 @@ void Ejercicio11 (void) {
 	corrSIMD(x, y, vcorr, CORR_L);
 	cuentaSIMD = *DWT_CYCCNT;
 
+	for(i = 0; i < CORR_L; i++)	{
+		vcorr[i] = 0;
+	}
+	*DWT_CYCCNT = 0;
+	corrSIMD2(x, y, vcorr, CORR_L);
+	cuentaSIMD2 = *DWT_CYCCNT;
+
+
+
 	return;
 }
 

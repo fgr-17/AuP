@@ -52,7 +52,7 @@
      * Definimos la rutina como global para que sea visible desde otros modulos.
      * esto me da el nombre de la funcion, es un archivo por funcion.
      */
-	.global corrSIMD
+	.global corrSIMD2
 
 
 	/**
@@ -96,7 +96,7 @@
  * el array se incrementa cada 4, en la ultima posicion la tengo en vector + (longitud - 1)*4
  */
 
-corrSIMD:
+corrSIMD2:
 
    push 	{primerByte - muestraY2, lr}  													/* guardamos la direccion de retorno en la pila */
    ldr		indiceL, =0
@@ -119,13 +119,33 @@ lazo_l:
 
 	no_dio_la_vuelta:
 
-	   cmp		primerByte, 0
-	   beq		segundo_byte
+	   cmp		primerByte, 1
 
-	   ldrh		muestraX1, [vectorX, indiceN, LSL DESP_16BITS]  			/* levanto halfword un elemento desde el comienzo */
-	   ldrh		muestraY1, [vectorY, indiceY, LSL DESP_16BITS]  			/* levanto halfword un elemento desde el final */
-	   // ldr		primerByte, =0												// señalo flag de primer byte
-	   bic		primerByte, 0xFFFFFFFF
+	   ittee		eq
+		   ldrheq		muestraX1, [vectorX, indiceN, LSL DESP_16BITS]  			/* levanto halfword un elemento desde el comienzo */
+		   ldrheq		muestraY1, [vectorY, indiceY, LSL DESP_16BITS]  			/* levanto halfword un elemento desde el final */
+		   ldrhne		muestraX2, [vectorX, indiceN, LSL DESP_16BITS]  			/* levanto halfword un elemento desde el comienzo */
+		   ldrhne		muestraY2, [vectorY, indiceY, LSL DESP_16BITS]  			/* levanto halfword un elemento desde el final */
+
+	   ittee		eq
+
+		   ldreq		primerByte, =0												// señalo flag de primer byte
+		   orreq		muestraX2, muestraX2, muestraX1, LSL #16					// sumo y dejo empaquetado las dos muestras
+		   orrne		muestraY2, muestraY2, muestraY1, LSL #16					// sumo y dejo empaquetado las dos muestras
+	  	   ldrne		primerByte, =1
+
+   	   smlad	acc, muestraX2, muestraY2, acc
+
+
+	   add		indiceN, 1													// incremento el indice N
+	   cmp		indiceN, longitud											// me fijo si llegue al final
+	   blo		lazo_n														// si no llegue, sigo con la sgte muestra
+       mla		acc, muestraX1, muestraY1, acc								// si llegue, hago solo la cuenta que acabo de levantar
+
+
+
+
+	   ldr		primerByte, =0												// señalo flag de primer byte
 	   add		indiceN, 1													// incremento el indice N
 	   cmp		indiceN, longitud											// me fijo si llegue al final
 	   blo		lazo_n														// si no llegue, sigo con la sgte muestra
@@ -137,10 +157,13 @@ lazo_l:
 
 	   ldrh		muestraX2, [vectorX, indiceN, LSL DESP_16BITS]  			/* levanto halfword un elemento desde el comienzo */
 	   ldrh		muestraY2, [vectorY, indiceY, LSL DESP_16BITS]  			/* levanto halfword un elemento desde el final */
+
+
 	   add		muestraX2, muestraX2, muestraX1, LSL #16					// sumo y dejo empaquetado las dos muestras
 	   add		muestraY2, muestraY2, muestraY1, LSL #16					// sumo y dejo empaquetado las dos muestras
 	   ldr		primerByte, =1
 	   smlad	acc, muestraX2, muestraY2, acc
+
 	   add		indiceN, 1
 	   cmp		indiceN, longitud
 	   blo		lazo_n
