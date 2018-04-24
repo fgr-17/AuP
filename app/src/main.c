@@ -114,6 +114,7 @@ static void Ejercicio8(void);
 static void Ejercicio9(void);
 static void Ejercicio10(void);
 static void Ejercicio11(void);
+static void EjercicioParcial (void);
 
 
 int main(void)
@@ -122,6 +123,9 @@ int main(void)
 	uint32_t aValue = 20,
 			 otherValue = 30,
 			 sumResult;
+
+
+	initHardware();
 
 	// Ejercicio1();
 	// Ejercicio2();
@@ -133,9 +137,9 @@ int main(void)
 	// Ejercicio8();
 	// Ejercicio9();
 	// Ejercicio10();
-	Ejercicio11();
+	// Ejercicio11();
 
-	initHardware();
+	EjercicioParcial();
 
 	sumResult = asmSum(aValue, otherValue);
 
@@ -463,14 +467,14 @@ void Ejercicio10 (void) {
 
 void Ejercicio11 (void) {
 
-	static int16_t x[CORR_L] = {1, 2, 3, 4, 5}; //, 6, 7, 8};
+	static int16_t x[CORR_L] = {1, 2, 3, 4, 5, 6, 7, 8}; //, 5, 4, 3, 2, 1}; //, 6, 7, 8};
 
-	static int16_t y[CORR_L] = {0, -2, 4, -6, 8}; //, -10, 12, -14};
+	static int16_t y[CORR_L] = {0, -2, 4, -6, 8, 6, 7 , 9}; //, 1, 2, 3, 4, 11}; //, -10, 12, -14};
 
 	static int16_t vcorr[CORR_L];
 
 	uint32_t i;
-	int32_t cuentaC, cuentaASM, cuentaSIMD, cuentaSIMD2, cuentaSIMD3;
+	int32_t cuentaC, cuentaASM, cuentaSIMD, cuentaSIMD2, cuentaSIMD3, cuentaSIMD4;
 
 	*DWT_CTRL |= 1;
 
@@ -478,8 +482,6 @@ void Ejercicio11 (void) {
 	for(i = 0; i < CORR_L; i++)	{
 		vcorr[i] = 0;
 	}
-
-
 	*DWT_CYCCNT = 0;
 	corrC(x, y, vcorr, CORR_L);
 	cuentaC = *DWT_CYCCNT;
@@ -488,7 +490,6 @@ void Ejercicio11 (void) {
 	for(i = 0; i < CORR_L; i++)	{
 		vcorr[i] = 0;
 	}
-
 	*DWT_CYCCNT = 0;
 	corrASM(x, y, vcorr, CORR_L);
 	cuentaASM = *DWT_CYCCNT;
@@ -509,8 +510,45 @@ void Ejercicio11 (void) {
 	cuentaSIMD2 = *DWT_CYCCNT;
 
 
+	for(i = 0; i < CORR_L; i++)	{
+		vcorr[i] = 0;
+	}
+	*DWT_CYCCNT = 0;
+	corrSIMD3(x, y, vcorr, CORR_L);
+	cuentaSIMD3 = *DWT_CYCCNT;
 
+	for(i = 0; i < CORR_L; i++)	{
+		vcorr[i] = 0;
+	}
+	*DWT_CYCCNT = 0;
+	corrSIMD4(x, y, vcorr, CORR_L);
+	cuentaSIMD4 = *DWT_CYCCNT;
 	return;
+
+
+}
+
+/**
+ *
+ * @fn static void EjercicioParcial (void)
+ *
+ *
+ *
+ */
+
+uint8_t foto [4][4] = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 8, 7, 6}, {5, 4, 3, 2}};
+
+static void EjercicioParcial (void)
+{
+
+
+	int8_t brillo = -2;
+
+	ajustarBrilloC(foto, 4, 4, brillo );
+	return;
+
+
+
 }
 
 /** @} doxygen end group definition */

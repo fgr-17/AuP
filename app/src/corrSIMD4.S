@@ -52,7 +52,7 @@
      * Definimos la rutina como global para que sea visible desde otros modulos.
      * esto me da el nombre de la funcion, es un archivo por funcion.
      */
-	.global corrSIMD3
+	.global corrSIMD4
 
 
 	/**
@@ -96,7 +96,7 @@
  * el array se incrementa cada 4, en la ultima posicion la tengo en vector + (longitud - 1)*4
  */
 
-corrSIMD3:
+corrSIMD4:
 
    push 	{temp - indiceY, lr}  													/* guardamos la direccion de retorno en la pila */
    bic		indiceL, #0xFFFFFFFF
@@ -104,10 +104,11 @@ corrSIMD3:
 //   mov		long_1, longitud
 
 lazo_l:
-
-   //ldr		acc, =0
-   //ldr		indiceN, =0
-
+/*
+   ldr		acc, =0
+   ldr		indiceN, =0
+   ldr		indiceY, =0
+*/
    bic		acc, #0xFFFFFFFF
    bic		indiceN, #0xFFFFFFFF
    bic		indiceY, #0xFFFFFFFF
@@ -119,11 +120,6 @@ lazo_l:
       add		indiceY, longitud, indiceY								// Si dio la vuelta, resto longitud menos el neg
 
    no_dio_la_vuelta:
-
-      sub temp, longitud, indiceN
-      cmp temp, 1
-
-      beq ultima_muestra_impar_X
 
       ldr   muestrasX, [vectorX, indiceN, LSL DESP_16BITS]
 
@@ -148,16 +144,6 @@ lazo_l:
       cmp		indiceN, longitud											// me fijo si llegue al final
       blo		lazo_n														// si no llegue, sigo con la sgte muestra
 
-
-   ultima_muestra_impar_X:
-      ldrsh muestrasX, [vectorX, indiceN, LSL DESP_16BITS]
-      ldrsh muestrasY, [vectorY, indiceY, LSL DESP_16BITS]
-      mla  acc, muestrasX, muestrasY, acc
-
-      add		indiceN, 2													// incremento el indice N
-      cmp		indiceN, longitud											// me fijo si llegue al final
-      blo		lazo_n														// si no llegue, sigo con la sgte muestra
-
 cierro_lazo_l:
 
    strh		acc, [vectorCorr, indiceL, LSL DESP_16BITS]
@@ -167,7 +153,7 @@ cierro_lazo_l:
    blo		lazo_l
 
 
-/*ldr		indiceN, =0
+/*
 	lazo_n:
 
 	   subs		indiceY, indiceN, indiceL
