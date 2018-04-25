@@ -536,19 +536,51 @@ void Ejercicio11 (void) {
  *
  */
 
-uint8_t foto [4][4] = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 8, 7, 6}, {5, 4, 3, 2}};
+#define FOTO_ANCHO	4
+#define FOTO_ALTO	4
+
+uint8_t foto [FOTO_ALTO][FOTO_ANCHO]; // = {{253, 2, 3, 254}, {5, 6, 7, 8}, {9, 8, 7, 6}, {5, 4, 3, 2}};
 
 static void EjercicioParcial (void)
 {
 
+	int32_t cuentaC, cuentaASM, cuentaSIMD;
+	int8_t brillo = -4;
+	int32_t i, j;
+	uint8_t offset = 0;
 
-	int8_t brillo = -2;
 
-	ajustarBrilloC(foto, 4, 4, brillo );
+	*DWT_CTRL |= 1;
+
+
+	for(i = 0; i < FOTO_ALTO; i++)	{
+		for(j = 0; j < FOTO_ANCHO; j++)	{
+			foto[i][j] = offset+ i+j;
+		}
+	}
+	*DWT_CYCCNT = 0;
+	ajustarBrilloC(foto, FOTO_ANCHO, FOTO_ALTO, brillo );
+	cuentaC = *DWT_CYCCNT;
+
+	for(i = 0; i < FOTO_ALTO; i++)	{
+		for(j = 0; j < FOTO_ANCHO; j++)	{
+			foto[i][j] = offset + i+j;
+		}
+	}
+	*DWT_CYCCNT = 0;
+	ajustarBrilloASM(foto, FOTO_ANCHO, FOTO_ALTO, brillo );
+	cuentaASM = *DWT_CYCCNT;
+
+
+	for(i = 0; i < FOTO_ALTO; i++)	{
+		for(j = 0; j < FOTO_ANCHO; j++)	{
+			foto[i][j] = offset + i+j;
+		}
+	}
+	*DWT_CYCCNT = 0;
+	ajustarBrilloSIMD(foto, FOTO_ANCHO, FOTO_ALTO, brillo );
+	cuentaSIMD = *DWT_CYCCNT;
 	return;
-
-
-
 }
 
 /** @} doxygen end group definition */

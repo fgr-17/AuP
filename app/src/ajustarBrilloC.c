@@ -21,26 +21,21 @@
 void ajustarBrilloC (uint8_t**imagen, uint32_t ancho, uint32_t alto, int8_t brillo)
 {
 
-	uint32_t x = 0;
-	uint32_t y = 0;
+	uint32_t i = 0;
+	uint32_t indiceMax;
 
-	int32_t temp;
+	volatile int32_t temp;
 	int16_t acc;
 
+	indiceMax = ancho * alto;
 
-	for(x = 0; x < ancho; x++) {
 
-		for(y = 0; y < alto; y++) {
+	for(i = 0; i < indiceMax; i++) {
+		temp =(uint8_t) *((uint8_t*)imagen + i) + brillo;
 
-			temp = (uint8_t)((imagen + (x * ancho)) + y) + brillo;
-
-			//imagen[x][y] = temp;
-
-			asm("usat %0, #15, %1"
-					:"=r" ( *(*(imagen + x) + y))
-					:"r" (temp));
-
-		}
+		asm("usat %0, #8, %1"
+				:"=r" ( (uint8_t) *((uint8_t*)imagen + i))
+				:"r" (temp));
 	}
 
 
